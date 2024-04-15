@@ -1,0 +1,22 @@
+- name: Create security group
+  ec2_group:
+    name: my-security-group
+    description: "Allow SSH and HTTP from specific IPs, allow HTTPS & HTTP outbound"
+    region: us-east-1
+    vpc_id: "vpc-04b81e43d004d4ca5"
+    rules:
+      - proto: tcp
+        ports:
+          - 22
+          - 80
+        cidr_ip: "172.31.0.0/16"
+      - proto: tcp
+        ports:
+          - 22
+        cidr_ip: "172.31.0.0/16"
+    rules_egress:
+      - proto: tcp
+        ports:
+          - 443
+          - 80
+        cidr_ip: 0.0.0.0/0

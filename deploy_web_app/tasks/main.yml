@@ -1,0 +1,9 @@
+- name: Deploy web application
+  ansible.builtin.shell:
+    cmd: |
+      sudo apt-get update
+      sudo apt-get install -y apache2
+      sudo systemctl start apache2
+      sudo systemctl enable apache2
+      echo "This is the local IP address: {{ ansible_default_ipv4.address }}" | sudo tee /var/www/html/index.html
+  become: yes
